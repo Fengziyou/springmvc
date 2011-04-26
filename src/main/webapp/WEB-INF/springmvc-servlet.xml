@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	<!-- 扫描所有注解的bean -->
+	<context:component-scan base-package="com.esen.web" />
+	<!-- 默认的spring mvc注解配置  -->
+	<mvc:annotation-driven/>
+	<!--bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/-->
+	<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
+		<property name="basePackage" value="com.esen.web"></property>
+		<property name="caseSensitive" value="true"></property>
+	</bean>
+	<!-- velocity -->
+	<bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<property name="resourceLoaderPath" value="/WEB-INF"/>
+		<property name="velocityProperties">
+			<props>
+				<prop key="input.encoding">UTF-8</prop>
+				<prop key="output.encoding">UTF-8</prop>
+			</props>
+		</property>
+	</bean>
+	<bean  class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+		<property name="cache" value="true"/>
+		<property name="prefix" value=""/>
+		<property name="suffix" value=".vm"/>
+		<property name="contentType" value="text/html;charset=UTF-8" /> 
+		<property name="exposeSpringMacroHelpers" value="true" />  
+		<property name="requestContextAttribute" value="req" /> 
+	</bean>	
+	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀,在requestmapping输入的地址后自动调用该类进行视图解析-->	
+	<!--bean
+			class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+			<property name="defaultContentType" value="application/json" /> 
+			<property name="mediaTypes">
+				<map>
+					<entry key="html" value="application/x-www-form-urlencoded" />
+					<entry key="json" value="application/json" />
+					<entry key="xml" value="application/xml" />
+				</map>
+			</property>
+			<property name="viewResolvers">
+				<list>
+					<bean  class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+						<property name="cache" value="false"/>
+						<property name="prefix" value=""/>
+						<property name="suffix" value=".vm"/>
+						<property name="contentType" value="text/html;charset=UTF-8" /> 
+						<property name="exposeSpringMacroHelpers" value="true" />  
+						<property name="requestContextAttribute" value="req" /> 
+					</bean>	
+					<bean  class="org.springframework.web.servlet.view.InternalResourceViewResolver">	
+						<property name="requestContextAttribute" value="req" />
+						<property name="prefix" value="/WEB-INF/jsp/" />
+						<property name="suffix" value=".jsp"></property>
+					</bean>		
+					>		
+				</list>
+			</property>
+			<property name="defaultViews">
+				<list>
+					<bean
+						class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
+					</bean>
+					<bean class="org.springframework.web.servlet.view.xml.MarshallingView">
+						<property name="marshaller">
+							<bean id="xStreamMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller" >			              
+								<property name="autodetectAnnotations" value="true"/>
+							</bean>
+						</property>
+						<property name="contentType" value="application/xml" />			        
+					</bean> 				
+				</list>
+			</property>
+		</bean-->
+	
+	<!-- 国际化配置 -->
+	<!--
+		<mvc:interceptors>
+			<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+		</mvc:interceptors>
+		<bean id="localeResolver" class="org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver" />
+		-->
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>/WEB-INF/classes/i18n/ApplicationResources</value>
+				<value>/WEB-INF/classes/ValidationMessages</value>
+			</list>	
+		</property>
+		<property name="cacheSeconds" value="0"/>
+		<property name="useCodeAsDefaultMessage" value="true" />
+	</bean>
+	
+	<!-- 工作流配置 -->
+	<!--
+		<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
+			<property name="flowExecutor" ref="flowExecutor"/>
+		</bean>
+		<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
+			<property name="order" value="-1"/>
+			<property name="flowRegistry" ref="flowRegistry" />
+		</bean>
+
+		<bean name="schedule" class="com.esen.web.ScheduleHandler" />
+		<import resource="webflow-config.xml" />
+		-->
+</beans>
