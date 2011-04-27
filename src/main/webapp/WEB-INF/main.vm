@@ -1,9 +1,14 @@
 <html>  
 <head>  
+	$ctx
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
 <title>Insert title here</title>  
 </head>  
 <body>
+	#springMessage("info.title")
+	#parse("/template/div.vm")
+	$msg
+	$list[1].id
 	<a href="$req.contextPath/ajax/simple/show">ajax</a>
 <br/>
 </body>  
