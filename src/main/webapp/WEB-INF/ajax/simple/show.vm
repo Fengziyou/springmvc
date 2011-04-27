@@ -8,10 +8,10 @@
 <body>  
 	<ul>
 		<li>
-			<a id="writeJson" href="$req.contextPath/ajax/ajax/json">Write JSON</a>
+			<a id="writeJson" href="json">Write JSON</a>
 		</li>
 		<li>
-			<a id="writeXml" href="$req.contextPath/ajax/ajax/xml">Write XML</a>
+			<a id="writeXml" href="xml">Write XML</a>
 		</li>
 	</ul>
 	<div id="content"></div>
@@ -38,7 +38,7 @@ $(document).ready(function() {
 				url: this.href, 
 				contentType: "application/xml",
                 processData: true,//contentType为xml时，些值为false
-                dataType: json,//json--返回json数据类型；xml--返回xml
+                dataType: type,//json--返回json数据类型；xml--返回xml
 				success: function(data) { renderContent(type,data); },
 				error: function(xhr) { alert("error:"+xhr);}
 			});				

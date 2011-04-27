@@ -6,8 +6,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.esen.entity.User;
 
-@Controller
+@Controller("ajaxSimple")
 public class SimpleController {
+	public SimpleController() {
+		System.err.println("---------------------------------------");
+	}
+
 	@RequestMapping
 	@ResponseBody
 	public User json() {

@@ -4,6 +4,7 @@
 <title>Insert title here</title>  
 </head>  
 <body>  
-$msg<br/>
+	<a href="$req.contextPath/ajax/simple/show">ajax</a>
+<br/>
 </body>  
 </html> 

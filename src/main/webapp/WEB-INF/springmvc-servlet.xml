@@ -12,10 +12,11 @@
 	<!-- 默认的spring mvc注解配置  -->
 	<mvc:annotation-driven/>
 	<!--bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/-->
+	<mvc:view-controller path="/" view-name="main"/>
 	<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
 		<property name="basePackage" value="com.esen.web"></property>
-		<property name="caseSensitive" value="true"></property>
 	</bean>
+	
 	<!-- velocity -->
 	<bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
 		<property name="resourceLoaderPath" value="/WEB-INF"/>
