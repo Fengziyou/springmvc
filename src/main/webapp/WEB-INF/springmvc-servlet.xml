@@ -7,16 +7,40 @@
 	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
 	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
-	<!-- 扫描所有注解的bean -->
-	<context:component-scan base-package="com.esen.web" />
+	<!-- 扫描base-package下面所有基于@Controller注解的类 -->
+	<context:component-scan base-package="com.esen.web" >
+		<context:include-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
+	</context:component-scan>
 	<!-- 默认的spring mvc注解配置  -->
-	<mvc:annotation-driven/>
-	<!--bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/-->
-	<mvc:view-controller path="/" view-name="main"/>
+	<!--mvc:annotation-driven/-->
+	<!--bean id="defaultAnnotationHandlerMapping" class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" /-->
+	<bean id="annotationMethodHandlerAdapter"  class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" >
+		<property name="messageConverters">
+			<list> 
+				<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+				<bean class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+					<constructor-arg> 
+						<bean class="org.springframework.oxm.xstream.XStreamMarshaller">
+							<property name="streamDriver" >
+								<bean class="com.thoughtworks.xstream.io.xml.DomDriver"/>
+							</property>
+							<property name="autodetectAnnotations" >
+								<value>true</value>
+							</property>
+						</bean>
+					</constructor-arg>
+				</bean>  
+				<bean class="org.springframework.http.converter.FormHttpMessageConverter"/>
+				<bean class="org.springframework.http.converter.BufferedImageHttpMessageConverter"/>
+				<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+				<bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
+				<bean class="org.springframework.http.converter.ResourceHttpMessageConverter"/>
+			</list>
+		</property>
+	</bean>	
 	<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
 		<property name="basePackage" value="com.esen.web"></property>
 	</bean>
-	
 	<!-- velocity -->
 	<bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
 		<property name="resourceLoaderPath" value="/WEB-INF"/>
@@ -33,7 +57,7 @@
 		<property name="suffix" value=".vm"/>
 		<property name="contentType" value="text/html;charset=UTF-8" /> 
 		<property name="exposeSpringMacroHelpers" value="true" />  
-		<property name="requestContextAttribute" value="req" /> 
+		<property name="requestContextAttribute" value="req" />  
 	</bean>	
 	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀,在requestmapping输入的地址后自动调用该类进行视图解析-->	
 	<!--bean

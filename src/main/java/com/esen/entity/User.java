@@ -1,6 +1,8 @@
 package com.esen.entity;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 
+@XStreamAlias("User")
 public class User {
 
 	private String id;
