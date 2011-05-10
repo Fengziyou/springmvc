@@ -11,7 +11,6 @@ import org.apache.velocity.runtime.Renderable;
 
 public class ReportRender implements Renderable {
 
-	@Override
 	public boolean render(InternalContextAdapter context, Writer writer) throws IOException, MethodInvocationException,
 			ParseErrorException, ResourceNotFoundException {
 		writer.write("<div>\n");

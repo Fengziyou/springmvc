@@ -1,15 +1,27 @@
-<html>  
-<head>  
-	$ctx
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
-<title>Insert title here</title>  
-</head>  
+<html>
+<head>
+$ctx
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="$req.contextPath/resources/js/jquery.js"></script>
+<title>Insert title here</title>
+</head>
 <body>
-	#springMessage("info.title")
-	#parse("/template/div.vm")
-	$msg
-	$list[1].id
+	#springMessage("info.title") #parse("/template/div.vm") $msg $list[1].id
 	<a href="$req.contextPath/ajax/simple/show">ajax</a>
-<br/>
-</body>  
-</html> 
+	<br />
+	<input type="button" id="hide" value="hide">
+	<br />
+	<input type="button" id="show" value="show">
+	<div id="test">test yeah!~~~~~~~</div>
+</body>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#hide").click(function() {
+			$("#test").hide();
+		});
+		$("#show").click(function() {
+			$("#test").show();
+		});
+	});
+</script>
+</html>

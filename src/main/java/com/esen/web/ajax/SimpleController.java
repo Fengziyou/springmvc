@@ -49,6 +49,12 @@ public class SimpleController {
 	}
 
 	@RequestMapping
+	@ResponseBody
+	public String string() {
+		return "just test simple string";
+	}
+
+	@RequestMapping
 	public User show() {
 		System.err.println(this);
 		User user = new User();

@@ -18,6 +18,7 @@
 	<bean id="annotationMethodHandlerAdapter"  class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" >
 		<property name="messageConverters">
 			<list> 
+				<bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
 				<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
 				<bean class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
 					<constructor-arg> 
