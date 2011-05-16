@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.esen.entity.User;
+
 @Controller
-@RequestMapping("/user")
 public class UserController {
 	private MessageSourceAccessor messages;
 	Map<String, User> users = new HashMap<String, User>();

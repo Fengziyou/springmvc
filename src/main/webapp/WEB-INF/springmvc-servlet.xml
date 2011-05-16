@@ -12,12 +12,13 @@
 		<context:include-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
 	</context:component-scan>
 	<!-- 默认的spring mvc注解配置  -->
-	<!--mvc:annotation-driven/-->
-	<bean id="defaultAnnotationHandlerMapping" class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+	<mvc:annotation-driven/>
+	<!--bean id="defaultAnnotationHandlerMapping" class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
 	</bean>
 	<bean id="annotationMethodHandlerAdapter"  class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" >
 		<property name="messageConverters">
 			<list> 
+				<bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
 				<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
 				<bean class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
 					<constructor-arg> 
@@ -38,7 +39,7 @@
 				<bean class="org.springframework.http.converter.ResourceHttpMessageConverter"/>
 			</list>
 		</property>
-	</bean>	
+	</bean-->	
 	<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
 		<property name="basePackage" value="com.esen.web"></property>
 	</bean>
